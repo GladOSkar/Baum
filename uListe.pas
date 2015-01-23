@@ -31,15 +31,15 @@ type
     Button2: TButton;
     Button3: TButton;
     procedure FormCreate(Sender: TObject);
+    function bauen(pos,count:byte):PKnoten;
     function wlr(k:PKnoten):string;
     function lwr(k:PKnoten):string;
     function lrw(k:PKnoten):string;
-    procedure dele(k:PKnoten);
     procedure AusgabeButtonClick(Sender: TObject);
-    procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure ArrayOut;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
+    procedure Button3Click(Sender: TObject);
   private
     { Private-Deklarationen }
   public
@@ -55,43 +55,24 @@ implementation
 
 var
   wurzel:PKnoten;
-  wurzel_alt:PKnoten;
   toadd:array of String;
 
 procedure TForm1.FormCreate(Sender: TObject);
-var elem_neu:PKnoten;
 begin
  SetLength(toadd,0);
+end;
 
- new(elem_neu);
- wurzel_alt:=elem_neu;
- wurzel_alt.inhalt:='+';
-
-  new(elem_neu);
-  wurzel_alt.left:=elem_neu;
-  wurzel_alt.left.inhalt:='*';
-
-  new(elem_neu);
-  wurzel_alt.right:=elem_neu;
-  wurzel_alt.right.inhalt:='c';
-
-   new(elem_neu);
-   wurzel_alt.left.left:=elem_neu;
-   wurzel_alt.left.left.inhalt:='d';
-
-   new(elem_neu);
-   wurzel_alt.left.right:=elem_neu;
-   wurzel_alt.left.right.inhalt:='e';
-
-   wurzel_alt.right.left:=nil;
-   wurzel_alt.right.right:=nil;
-
-    wurzel_alt.left.left.left:=nil;
-    wurzel_alt.left.left.right:=nil;
-
-    wurzel_alt.left.right.left:=nil;
-    wurzel_alt.left.right.right:=nil;
-
+function TForm1.bauen(pos,count:byte):PKnoten;
+var neuer:PKnoten;
+begin
+if count=0 then result:=nil else
+  begin
+    new(neuer);
+    neuer.inhalt:=toadd[pos];
+    neuer.left:=bauen(pos+1,count div 2);
+    neuer.right:=bauen(pos+1+count div 2,count-1-count div 2);
+    result:=neuer;
+  end;
 end;
 
 function TForm1.wlr;
@@ -126,14 +107,12 @@ end;
 
 procedure TForm1.AusgabeButtonClick(Sender: TObject);
 begin
-      if RadioButton1.Checked then Memo1.Lines.Add(wlr(wurzel))
- else if RadioButton2.Checked then Memo1.Lines.Add(lwr(wurzel))
- else if RadioButton3.Checked then Memo1.Lines.Add(lrw(wurzel));
-end;
-
-procedure TForm1.FormClose(Sender: TObject; var Action: TCloseAction);
-begin
- dele(wurzel);
+ if length(toadd)>0 then
+  begin
+        if RadioButton1.Checked then Memo1.Lines.Add(wlr(wurzel))
+   else if RadioButton2.Checked then Memo1.Lines.Add(lwr(wurzel))
+   else if RadioButton3.Checked then Memo1.Lines.Add(lrw(wurzel));
+  end;
 end;
 
 procedure TForm1.ArrayOut;
@@ -160,4 +139,8 @@ begin
  ArrayOut;
 end;
 
+procedure TForm1.Button3Click(Sender: TObject);
+begin
+ wurzel:=bauen(0,length(toadd));
+end;
 end.

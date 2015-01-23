@@ -1,121 +1,121 @@
 object Form1: TForm1
-  Left = 121
-  Top = 236
-  Width = 417
-  Height = 279
+  Left = 884
+  Top = 346
+  Width = 870
+  Height = 422
   Caption = 'Liste'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -11
+  Font.Height = -14
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   OldCreateOrder = False
-  OnClose = FormClose
   OnCreate = FormCreate
-  PixelsPerInch = 96
-  TextHeight = 13
+  PixelsPerInch = 120
+  TextHeight = 16
   object Label2: TLabel
-    Left = 24
-    Top = 24
-    Width = 74
-    Height = 13
-    Caption = 'Aktueller Baum:'
+    Left = 22
+    Top = 150
+    Width = 58
+    Height = 16
+    Caption = 'Ausgabe:'
   end
   object Label1: TLabel
-    Left = 216
-    Top = 24
-    Width = 122
-    Height = 13
+    Left = 26
+    Top = 22
+    Width = 153
+    Height = 16
     Caption = 'Zu konvertierendes Array:'
   end
   object Label3: TLabel
-    Left = 216
-    Top = 136
-    Width = 51
-    Height = 13
-    Caption = 'Ausgeben:'
+    Left = 162
+    Top = 151
+    Width = 56
+    Height = 16
+    Caption = 'Methode:'
   end
   object Memo1: TMemo
     Left = 24
-    Top = 40
-    Width = 185
-    Height = 177
+    Top = 168
+    Width = 201
+    Height = 185
     TabOrder = 0
   end
   object AusgabeButton: TButton
-    Left = 272
-    Top = 152
-    Width = 105
-    Height = 65
-    Caption = 'Baum ausgeben'
+    Left = 135
+    Top = 112
+    Width = 90
+    Height = 33
+    Caption = 'Ausgeben'
     TabOrder = 1
     OnClick = AusgabeButtonClick
   end
   object RadioButton1: TRadioButton
-    Left = 216
-    Top = 152
-    Width = 49
-    Height = 17
+    Left = 162
+    Top = 171
+    Width = 60
+    Height = 21
     Caption = 'WLR'
     TabOrder = 2
   end
   object RadioButton2: TRadioButton
-    Left = 216
-    Top = 176
-    Width = 49
-    Height = 17
+    Left = 162
+    Top = 201
+    Width = 60
+    Height = 21
     Caption = 'LWR'
     Checked = True
     TabOrder = 3
     TabStop = True
   end
   object RadioButton3: TRadioButton
-    Left = 216
-    Top = 200
-    Width = 49
-    Height = 17
+    Left = 162
+    Top = 230
+    Width = 60
+    Height = 21
     Caption = 'LRW'
     TabOrder = 4
   end
   object Edit1: TEdit
-    Left = 216
-    Top = 40
-    Width = 49
-    Height = 25
+    Left = 24
+    Top = 41
+    Width = 65
+    Height = 24
     TabOrder = 5
   end
   object Edit2: TEdit
-    Left = 216
-    Top = 72
-    Width = 161
-    Height = 25
+    Left = 24
+    Top = 81
+    Width = 200
+    Height = 24
     TabOrder = 6
   end
   object Button1: TButton
-    Left = 272
-    Top = 40
-    Width = 49
-    Height = 25
+    Left = 95
+    Top = 41
+    Width = 60
+    Height = 31
     Caption = 'Add'
     TabOrder = 7
     OnClick = Button1Click
   end
   object Button2: TButton
-    Left = 328
-    Top = 40
-    Width = 49
-    Height = 25
+    Left = 164
+    Top = 41
+    Width = 60
+    Height = 31
     Caption = 'Del'
     TabOrder = 8
     OnClick = Button2Click
   end
   object Button3: TButton
-    Left = 304
-    Top = 104
-    Width = 75
-    Height = 25
+    Left = 24
+    Top = 112
+    Width = 98
+    Height = 33
     Caption = 'Baumifizieren!'
     TabOrder = 9
+    OnClick = Button3Click
   end
 end
