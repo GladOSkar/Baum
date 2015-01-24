@@ -33,7 +33,7 @@ type
     procedure FormCreate(Sender: TObject);
     function bauen(pos,count:byte):PKnoten;
     function wlr(k:PKnoten):string;
-    function lwr(k:PKnoten):string;
+    function lwr(k:PKnoten;t:byte):string;
     function lrw(k:PKnoten):string;
     procedure AusgabeButtonClick(Sender: TObject);
     procedure ArrayOut;
@@ -56,6 +56,10 @@ implementation
 var
   wurzel:PKnoten;
   toadd:array of String;
+
+const
+  ux:byte = 200;
+  uy:byte = 25;
 
 procedure TForm1.FormCreate(Sender: TObject);
 begin
@@ -89,9 +93,25 @@ function TForm1.lwr;
 var s:string;
 begin
  s:='';
- if k.left<>nil then s:=s+lwr(k.left);
+ if k.left<>nil then
+  begin
+   s:=s+lwr(k.left,t+1);
+  end;
+
  s:=s+k.inhalt;
- if k.right<>nil then s:=s+lwr(k.right);
+
+ with canvas do
+  begin
+   MoveTo(PenPos.X+50,uy+t*50);
+   Ellipse(PenPos.X-20,PenPos.Y-20,PenPos.X+20,PenPos.Y+20);
+   TextOut(PenPos.X-5,PenPos.Y-8,k.inhalt);
+  end;
+
+ if k.right<>nil then
+  begin
+   s:=s+lwr(k.right,t+1);
+  end;
+
  result:=s;
 end;
 
@@ -107,10 +127,17 @@ end;
 
 procedure TForm1.AusgabeButtonClick(Sender: TObject);
 begin
+ canvas.pen.color:=clbtnface;
+ canvas.brush.color:=clbtnface;
+ canvas.rectangle(0,0,clientwidth-1,clientheight-1);
+ canvas.pen.color:=clblack;
+ canvas.brush.color:=cllime;
+ canvas.MoveTo(ux,uy);
+
  if length(toadd)>0 then
   begin
         if RadioButton1.Checked then Memo1.Lines.Add(wlr(wurzel))
-   else if RadioButton2.Checked then Memo1.Lines.Add(lwr(wurzel))
+   else if RadioButton2.Checked then Memo1.Lines.Add(lwr(wurzel,0))
    else if RadioButton3.Checked then Memo1.Lines.Add(lrw(wurzel));
   end;
 end;
