@@ -19,17 +19,17 @@ type
   TForm1 = class(TForm)
     Memo1: TMemo;
     AusgabeButton: TButton;
-    Label2: TLabel;
     RadioButton1: TRadioButton;
     RadioButton2: TRadioButton;
     RadioButton3: TRadioButton;
     Edit1: TEdit;
     Edit2: TEdit;
     Button1: TButton;
-    Label1: TLabel;
     Label3: TLabel;
     Button2: TButton;
     Button3: TButton;
+    Button4: TButton;
+    GroupBox1: TGroupBox;
     procedure FormCreate(Sender: TObject);
     function bauen(pos,count:byte):PKnoten;
     function wlr(k:PKnoten):string;
@@ -40,6 +40,7 @@ type
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
+    procedure Button4Click(Sender: TObject);
   private
     { Private-Deklarationen }
   public
@@ -58,8 +59,8 @@ var
   toadd:array of String;
 
 const
-  ux:byte = 200;
-  uy:byte = 25;
+  ux:byte = 0;
+  uy:byte = 200;
 
 procedure TForm1.FormCreate(Sender: TObject);
 begin
@@ -83,7 +84,7 @@ function TForm1.wlr;
 var s:string;
 begin
  s:='';
- s:=s+k.inhalt;
+ s:=s+k.inhalt+' ';
  if k.left<>nil then s:=s+wlr(k.left);
  if k.right<>nil then s:=s+wlr(k.right);
  result:=s;
@@ -93,12 +94,13 @@ function TForm1.lwr;
 var s:string;
 begin
  s:='';
+ 
  if k.left<>nil then
   begin
    s:=s+lwr(k.left,t+1);
   end;
 
- s:=s+k.inhalt;
+ s:=s+k.inhalt+' ';
 
  with canvas do
   begin
@@ -121,7 +123,7 @@ begin
  s:='';
  if k.left<>nil then s:=s+lrw(k.left);
  if k.right<>nil then s:=s+lrw(k.right);
- s:=s+k.inhalt;
+ s:=s+k.inhalt+' ';
  result:=s;
 end;
 
@@ -170,4 +172,16 @@ procedure TForm1.Button3Click(Sender: TObject);
 begin
  wurzel:=bauen(0,length(toadd));
 end;
+procedure TForm1.Button4Click(Sender: TObject);
+begin
+ SetLength(toadd,6);
+ toadd[0]:='w';
+ toadd[1]:='l';
+ toadd[2]:='ll';
+ toadd[3]:='lr';
+ toadd[4]:='r';
+ toadd[5]:='rl';
+ ArrayOut;
+end;
+
 end.
