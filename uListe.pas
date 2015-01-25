@@ -32,9 +32,9 @@ type
     GroupBox1: TGroupBox;
     procedure FormCreate(Sender: TObject);
     function bauen(pos,count:byte):PKnoten;
-    function wlr(k:PKnoten):string;
+    function wlr(k:PKnoten;t:byte):string;
     function lwr(k:PKnoten;t:byte):string;
-    function lrw(k:PKnoten):string;
+    function lrw(k:PKnoten;t:byte):string;
     procedure AusgabeButtonClick(Sender: TObject);
     procedure ArrayOut;
     procedure Button1Click(Sender: TObject);
@@ -84,9 +84,20 @@ function TForm1.wlr;
 var s:string;
 begin
  s:='';
+
  s:=s+k.inhalt+' ';
- if k.left<>nil then s:=s+wlr(k.left);
- if k.right<>nil then s:=s+wlr(k.right);
+
+ with canvas do
+  begin
+   MoveTo(PenPos.X+50,uy+t*50);
+   Ellipse(PenPos.X-20,PenPos.Y-20,PenPos.X+20,PenPos.Y+20);
+   TextOut(PenPos.X-5,PenPos.Y-8,k.inhalt);
+  end;
+
+ if k.left<>nil then s:=s+wlr(k.left,t+1);
+
+ if k.right<>nil then s:=s+wlr(k.right,t+1);
+
  result:=s;
 end;
 
@@ -121,9 +132,20 @@ function TForm1.lrw;
 var s:string;
 begin
  s:='';
- if k.left<>nil then s:=s+lrw(k.left);
- if k.right<>nil then s:=s+lrw(k.right);
+
+ if k.left<>nil then s:=s+lrw(k.left,t+1);
+
+ if k.right<>nil then s:=s+lrw(k.right,t+1);
+
  s:=s+k.inhalt+' ';
+
+ with canvas do
+  begin
+   MoveTo(PenPos.X+50,uy+t*50);
+   Ellipse(PenPos.X-20,PenPos.Y-20,PenPos.X+20,PenPos.Y+20);
+   TextOut(PenPos.X-5,PenPos.Y-8,k.inhalt);
+  end;
+
  result:=s;
 end;
 
@@ -138,9 +160,9 @@ begin
 
  if length(toadd)>0 then
   begin
-        if RadioButton1.Checked then Memo1.Lines.Add(wlr(wurzel))
+        if RadioButton1.Checked then Memo1.Lines.Add(wlr(wurzel,0))
    else if RadioButton2.Checked then Memo1.Lines.Add(lwr(wurzel,0))
-   else if RadioButton3.Checked then Memo1.Lines.Add(lrw(wurzel));
+   else if RadioButton3.Checked then Memo1.Lines.Add(lrw(wurzel,0));
   end;
 end;
 
