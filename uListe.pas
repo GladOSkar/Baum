@@ -196,13 +196,17 @@ begin
 end;
 procedure TForm1.Button4Click(Sender: TObject);
 begin
- SetLength(toadd,6);
- toadd[0]:='w';
- toadd[1]:='l';
- toadd[2]:='ll';
- toadd[3]:='lr';
- toadd[4]:='r';
- toadd[5]:='rl';
+ SetLength(toadd,9);
+ toadd[0]:='W';
+ toadd[1]:='L';
+ toadd[2]:='LL';
+ toadd[3]:='LLL';
+ toadd[4]:='LR';
+ toadd[5]:='R';
+ toadd[6]:='RL';
+ toadd[7]:='RLL';
+ toadd[8]:='RR';
+
  ArrayOut;
 end;
 
